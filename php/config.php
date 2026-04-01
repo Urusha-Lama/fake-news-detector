@@ -15,7 +15,7 @@ define('APP_URL',     'http://localhost/fake-news-detector/php');  // change in 
 define('SESSION_LIFETIME', 1800);   // 30 minutes idle timeout
 define('MAX_LOGIN_ATTEMPTS', 5);    // brute-force lock
 define('LOCKOUT_TIME', 900);        // 15 minutes lockout (seconds)
-
+date_default_timezone_set('Asia/Kathmandu');
 // ── PDO Connection (singleton) ──────────────────────────────
 function getDB(): PDO {
     static $pdo = null;

@@ -33,4 +33,4 @@ if (ini_get('session.use_cookies')) {
 session_destroy();
 
 // Redirect to login with confirmation message
-redirect('/fake-news-detector/login.php?logged_out=1');
+redirect('/fake-news-detector/php/login.php?logged_out=1');

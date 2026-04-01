@@ -61,6 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Rate limited — still show success to prevent enumeration
                 $state = 'sent';
             } else {
+              $token = $_GET['token'] ?? '';
+              $hash  = hash('sha256', $token);
                 // ── Look up user ──
                 $stmt = $db->prepare("SELECT id FROM users WHERE email = ? AND is_active = 1 LIMIT 1");
                 $stmt->execute([$email]);
@@ -499,7 +501,7 @@ unset($_SESSION['dev_reset_link']);
 
       <ul class="steps">
         <li><div class="step-num">1</div> Open the email from TruthGuard AI</li>
-        <li><div class="step-num">2</div> Click the reset link — it expires in <strong style="color:var(--text)">1 hour</strong></li>
+        <li><div class="step-num">2</div> Click the reset link — it expires in <strong style="color:var(--text)">1 min</strong></li>
         <li><div class="step-num">3</div> Create a new strong password</li>
       </ul>
 

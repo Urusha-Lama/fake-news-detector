@@ -199,7 +199,7 @@ $csrf = csrfToken();
 <body>
 <header>
   <nav>
-    <a href="index.php" class="nav-logo">
+    <a href="index.html" class="nav-logo">
       <div class="logo-icon">🛡️</div>
       TruthGuard<span style="color:var(--accent)">AI</span>
     </a>
@@ -304,7 +304,7 @@ $csrf = csrfToken();
           <label>
             <input type="checkbox" name="remember" value="1"/> Remember me for 30 days
           </label>
-          <a href="forgot_password.php">Forgot password?</a>
+          <a href="http://localhost/fake-news-detector/php/forgot_password.php">Forgot password?</a>
         </div>
 
         <button type="submit" class="btn-submit" id="submitBtn">
@@ -312,7 +312,7 @@ $csrf = csrfToken();
           <span id="btnSpinner" style="display:none">⏳ Signing in...</span>
         </button>
       </form>
-      <div class="switch-link">Don't have an account? <a href="register.php">Create one free →</a></div>
+      <div class="switch-link">Don't have an account? <a href="http://localhost/fake-news-detector/php/register.php">Create one free →</a></div>
     </div>
   </div>
 </div>

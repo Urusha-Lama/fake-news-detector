@@ -8,7 +8,6 @@
 require_once 'config.php';
 secureSession();
 requireLogin(); // Redirects to login.php if not logged in
-
 // Get fresh user data from DB (session could be stale)
 $db   = getDB();
 $stmt = $db->prepare("SELECT * FROM users WHERE id = ? LIMIT 1");
@@ -128,8 +127,8 @@ $recentAnalyses = $stmtRecent->fetchAll();
       TruthGuard<span style="color:var(--accent)">AI</span>
     </a>
     <div class="nav-links">
-      <a href="index.php">Home</a>
-      <a href="index.php#detect">Detector</a>
+      <a href="index.html">Home</a>
+      <a href="index.html#detect">Detector</a>
       <!-- User pill -->
       <div class="nav-user">
         <div class="user-avatar"><?= strtoupper(substr($user['first_name'],0,1)) ?></div>
@@ -154,7 +153,7 @@ $recentAnalyses = $stmtRecent->fetchAll();
       </div>
     </div>
     <div style="margin-left:auto">
-      <a href="index.php#detect" class="btn-primary">🔍 Analyze News</a>
+      <a href="index.html#detect" class="btn-primary">🔍 Analyze News</a>
     </div>
   </div>
 
@@ -221,7 +220,7 @@ $recentAnalyses = $stmtRecent->fetchAll();
       </div>
 
       <div style="margin-top:1.2rem">
-        <a href="index.php#detect" class="btn-primary" style="font-size:.82rem;padding:.6rem 1.2rem">🔍 Start Analyzing</a>
+        <a href="index.html#detect" class="btn-primary" style="font-size:.82rem;padding:.6rem 1.2rem">🔍 Start Analyzing</a>
       </div>
     </div>
 
@@ -233,7 +232,7 @@ $recentAnalyses = $stmtRecent->fetchAll();
         <div class="empty">
           <div class="empty-icon">📰</div>
           <p>No analyses yet.</p>
-          <p style="margin-top:.4rem"><a href="index.php#detect">Analyze your first article →</a></p>
+          <p style="margin-top:.4rem"><a href="index.html#detect">Analyze your first article →</a></p>
         </div>
       <?php else: ?>
         <?php foreach ($recentAnalyses as $a): ?>
