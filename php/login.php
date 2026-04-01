@@ -13,7 +13,7 @@ secureSession();
 
 // Already logged in → go to dashboard
 if (!empty($_SESSION['user_id'])) {
-    redirect('http://localhost/fake-news-detector/dashboard.php');
+    redirect('http://localhost/fake-news-detector/php/dashboard.php');
 }
 
 $errors = [];
@@ -228,7 +228,7 @@ $csrf = csrfToken();
   <div class="auth-form-side">
     <div class="auth-card">
       <h3>Sign in</h3>
-      <p class="sub">Don't have an account? <a href="http://localhost/fake-news-detector/register.php">Create one free →</a></p>
+      <p class="sub">Don't have an account? <a href="http://localhost/fake-news-detector/php/register.php">Create one free →</a></p>
 
       <?php if (isset($_GET['registered'])): ?>
         <div class="alert alert-success">✅ Account created! Please sign in below.</div>

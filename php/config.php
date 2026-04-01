@@ -11,7 +11,7 @@ define('DB_PASS', '');
 define('DB_CHARSET', 'utf8mb4');
 
 define('APP_NAME',    'TruthGuard AI');
-define('APP_URL',     'http://localhost/fake-news-detector');  // change in production
+define('APP_URL',     'http://localhost/fake-news-detector/php');  // change in production
 define('SESSION_LIFETIME', 1800);   // 30 minutes idle timeout
 define('MAX_LOGIN_ATTEMPTS', 5);    // brute-force lock
 define('LOCKOUT_TIME', 900);        // 15 minutes lockout (seconds)

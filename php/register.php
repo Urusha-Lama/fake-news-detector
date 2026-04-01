@@ -10,7 +10,7 @@ secureSession();
 
 // Already logged in → go to dashboard
 if (!empty($_SESSION['user_id'])) {
-    redirect('http://localhost/fake-news-detector/index.html');
+    redirect('http://localhost/fake-news-detector/php/index.html');
 }
 
 $errors   = [];
@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Regenerate CSRF
             unset($_SESSION['csrf_token']);
 
-            redirect('/fake-news-detector/index.php?welcome=1');
+            redirect('/fake-news-detector/php/index.php?welcome=1');
         }
     }
 }
@@ -215,13 +215,13 @@ $csrf = csrfToken();
 <body>
 <header>
   <nav>
-    <a href="/fake-news-detector/index.php" class="nav-logo">
+    <a href="/fake-news-detector/php/index.php" class="nav-logo">
       <div class="logo-icon">🛡️</div>
       TruthGuard<span style="color:var(--accent)">AI</span>
     </a>
     <div class="nav-links">
-      <a href="http://localhost/fake-news-detector/index.html">Home</a>
-      <a href="http://localhost/fake-news-detector/login.php" class="btn-outline">Sign In</a>
+      <a href="http://localhost/fake-news-detector/php/index.html">Home</a>
+      <a href="http://localhost/fake-news-detector/php/login.php" class="btn-outline">Sign In</a>
     </div>
   </nav>
 </header>
