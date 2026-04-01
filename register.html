@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register – TruthGuard AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── Design Tokens ─────────────────────────────────── */
+    :root {
+      --bg:#05080f; --surface:#0c1120; --surface2:#121929;
+      --border:rgba(255,255,255,0.07);
+      --accent:#00e5ff; --accent2:#7b61ff;
+      --danger:#ff4d6d; --safe:#00e5a0; --warn:#ffc107;
+      --text:#e8ecf4; --muted:#7a8499;
+      --font-head:'Syne',sans-serif;
+      --font-body:'DM Sans',sans-serif;
+      --t:0.22s cubic-bezier(.4,0,.2,1);
+    }
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      background:var(--bg); color:var(--text);
+      font-family:var(--font-body); min-height:100vh;
+      display:flex; flex-direction:column;
+    }
+    a { text-decoration:none; color:var(--accent); }
+
+    /* Noise overlay */
+    body::before {
+      content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+
+    /* ── Header ──────────────────────────────────────────── */
+    header {
+      position:sticky; top:0; z-index:100;
+      background:rgba(5,8,15,.85); backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--border);
+    }
+    nav {
+      max-width:1200px; margin:auto; padding:0 2rem;
+      display:flex; align-items:center; height:66px; gap:1rem;
+    }
+    .nav-logo {
+      font-family:var(--font-head); font-weight:800; font-size:1.25rem;
+      display:flex; align-items:center; gap:.5rem;
+      letter-spacing:-.02em; color:var(--text);
+    }
+    .logo-icon {
+      width:32px; height:32px; border-radius:8px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      display:flex; align-items:center; justify-content:center; font-size:1rem;
+    }
+    .nav-links { margin-left:auto; display:flex; align-items:center; gap:.25rem; }
+    .nav-links a {
+      padding:.4rem .9rem; border-radius:8px;
+      font-size:.88rem; font-weight:500; color:var(--muted);
+      transition:all var(--t);
+    }
+    .nav-links a:hover { color:var(--text); background:var(--border); }
+    .btn-nav {
+      background:transparent !important;
+      border:1px solid var(--border) !important;
+      color:var(--text) !important;
+    }
+    .btn-nav:hover { border-color:var(--muted) !important; }
+
+    /* ── Page Layout ─────────────────────────────────────── */
+    .auth-wrap {
+      flex:1; display:grid; grid-template-columns:1fr 1fr;
+      min-height:calc(100vh - 66px);
+    }
+
+    /* Left panel */
+    .auth-panel {
+      background:linear-gradient(160deg,rgba(123,97,255,.09),rgba(0,229,255,.05));
+      border-right:1px solid var(--border);
+      padding:4rem 3rem;
+      display:flex; flex-direction:column; justify-content:center;
+      position:relative; overflow:hidden;
+    }
+    .auth-panel::before {
+      content:''; position:absolute; top:-150px; left:-150px;
+      width:500px; height:500px; border-radius:50%;
+      background:radial-gradient(circle,rgba(0,229,255,.07),transparent 70%);
+      pointer-events:none;
+    }
+    .auth-panel h2 {
+      font-family:var(--font-head); font-size:2rem; font-weight:800;
+      letter-spacing:-.03em; line-height:1.1; margin-bottom:1rem;
+    }
+    .auth-panel h2 span {
+      background:linear-gradient(90deg,var(--accent2),var(--accent));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .auth-panel p { color:var(--muted); font-weight:300; line-height:1.7; max-width:340px; font-size:.92rem; }
+    .perks { list-style:none; margin-top:2rem; display:flex; flex-direction:column; gap:.75rem; }
+    .perks li { display:flex; align-items:center; gap:.8rem; font-size:.88rem; }
+    .pk {
+      width:30px; height:30px; border-radius:8px; flex-shrink:0;
+      background:rgba(0,229,255,.1); border:1px solid rgba(0,229,255,.2);
+      display:flex; align-items:center; justify-content:center; font-size:.9rem;
+    }
+
+    /* Right panel */
+    .auth-form-side {
+      display:flex; align-items:center; justify-content:center;
+      padding:2.5rem 2rem; overflow-y:auto;
+    }
+    .auth-card { width:100%; max-width:460px; animation:fadeUp .5s ease both; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+    .auth-card h3 {
+      font-family:var(--font-head); font-size:1.6rem; font-weight:800;
+      letter-spacing:-.02em; margin-bottom:.3rem;
+    }
+    .auth-card .sub { color:var(--muted); font-size:.88rem; margin-bottom:1.8rem; }
+
+    /* ── Form Fields ─────────────────────────────────────── */
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .fg { margin-bottom:1.1rem; }
+    .fg label {
+      display:flex; align-items:center; justify-content:space-between;
+      font-size:.78rem; font-weight:500; color:var(--muted);
+      margin-bottom:.4rem; letter-spacing:.03em;
+    }
+    .fg label .req { color:var(--danger); margin-left:2px; }
+    .fg input {
+      width:100%; background:var(--surface);
+      border:1.5px solid var(--border); border-radius:10px;
+      padding:.8rem 1rem; color:var(--text);
+      font-family:var(--font-body); font-size:.93rem;
+      transition:border-color var(--t), box-shadow var(--t);
+    }
+    .fg input:focus {
+      outline:none;
+      border-color:rgba(0,229,255,.5);
+      box-shadow:0 0 0 3px rgba(0,229,255,.07);
+    }
+    .fg input.is-error { border-color:var(--danger) !important; }
+    .fg input.is-ok    { border-color:var(--safe)   !important; }
+    .fg input::placeholder { color:var(--muted); }
+
+    /* Error / OK messages */
+    .field-err {
+      font-size:.74rem; color:var(--danger);
+      margin-top:.3rem; display:flex; align-items:flex-start;
+      gap:.3rem; line-height:1.4;
+    }
+    .field-ok { font-size:.74rem; color:var(--safe); margin-top:.3rem; }
+
+    /* Password visibility toggle */
+    .pwd-wrap { position:relative; }
+    .pwd-toggle {
+      position:absolute; right:10px; top:50%; transform:translateY(-50%);
+      background:none; border:none; color:var(--muted);
+      cursor:pointer; font-size:.85rem; padding:4px;
+    }
+    .pwd-toggle:hover { color:var(--text); }
+
+    /* Strength meter */
+    .strength-bar { display:flex; gap:3px; margin-top:.4rem; }
+    .sb {
+      flex:1; height:4px; border-radius:100px;
+      background:var(--surface2); transition:background .3s ease;
+    }
+    .strength-hint { font-size:.72rem; color:var(--muted); margin-top:.25rem; }
+
+    /* Checkbox */
+    .check-row { display:flex; align-items:flex-start; gap:.6rem; margin-bottom:1.3rem; }
+    .check-row input[type=checkbox] {
+      width:16px; height:16px; accent-color:var(--accent);
+      margin-top:2px; flex-shrink:0; cursor:pointer;
+    }
+    .check-row label { font-size:.82rem; color:var(--muted); line-height:1.5; cursor:pointer; }
+
+    /* Google button */
+    .btn-google {
+      width:100%; padding:.78rem; border-radius:10px; cursor:pointer;
+      background:var(--surface); border:1px solid var(--border);
+      color:var(--text); font-family:var(--font-body);
+      font-size:.88rem; font-weight:500;
+      display:flex; align-items:center; justify-content:center; gap:.6rem;
+      transition:all var(--t); margin-bottom:.5rem;
+    }
+    .btn-google:hover { border-color:var(--muted); background:var(--surface2); }
+
+    /* Divider */
+    .divider {
+      display:flex; align-items:center; gap:1rem;
+      margin:1.2rem 0; color:var(--muted); font-size:.78rem;
+    }
+    .divider::before,.divider::after { content:''; flex:1; height:1px; background:var(--border); }
+
+    /* Submit button */
+    .btn-submit {
+      width:100%; padding:.88rem; border-radius:10px; border:none; cursor:pointer;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      font-family:var(--font-head); font-weight:700; font-size:.95rem; color:#fff;
+      transition:all var(--t);
+      display:flex; align-items:center; justify-content:center; gap:.5rem;
+    }
+    .btn-submit:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(0,229,255,.25); }
+    .btn-submit:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+
+    .switch-link { text-align:center; margin-top:1.3rem; font-size:.85rem; color:var(--muted); }
+
+    /* General alert (server error) */
+    .alert-box {
+      background:rgba(255,77,109,.08); border:1px solid rgba(255,77,109,.3);
+      border-radius:10px; padding:.9rem 1rem; margin-bottom:1.2rem;
+      font-size:.85rem; color:var(--danger);
+    }
+
+    /* Footer */
+    footer { background:var(--surface); border-top:1px solid var(--border); }
+    .footer-bar {
+      max-width:1200px; margin:auto; padding:1.1rem 2rem;
+      display:flex; justify-content:space-between; flex-wrap:wrap;
+      gap:.5rem; font-size:.78rem; color:var(--muted);
+    }
+
+    /* Responsive */
+    @media(max-width:800px) {
+      .auth-wrap { grid-template-columns:1fr; }
+      .auth-panel { display:none; }
+      .form-row { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════ -->
+<header>
+  <nav>
+    <a href="/fake-news-detector/index.php" class="nav-logo">
+      <div class="logo-icon">🛡️</div>
+      TruthGuard<span style="color:var(--accent)">AI</span>
+    </a>
+    <div class="nav-links">
+      <a href="/fake-news-detector/index.html">Home</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="/fake-news-detector/login.php" class="btn-nav">Sign In</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ══ BODY ════════════════════════════════════════════════ -->
+<div class="auth-wrap">
+
+  <!-- Left Info Panel -->
+  <div class="auth-panel">
+    <h2>Start fighting<br><span>misinformation</span><br>today</h2>
+    <p>Create your free account and get 10 analyses per day. No credit card required.</p>
+    <ul class="perks">
+      <li><div class="pk">🔍</div> 10 free analyses every day</li>
+      <li><div class="pk">📊</div> Full credibility reports</li>
+      <li><div class="pk">🌐</div> 150+ languages supported</li>
+      <li><div class="pk">⚡</div> Results in under 2 seconds</li>
+      <li><div class="pk">🔒</div> Your data is always private</li>
+    </ul>
+  </div>
+
+  <!-- Right Form Panel -->
+  <div class="auth-form-side">
+    <div class="auth-card">
+      <h3>Create your account</h3>
+      <p class="sub">Already have an account? <a href="/fake-news-detector/login.php">Sign in →</a></p>
+
+      <!-- Server-side errors will appear here (when using register.php) -->
+      <div id="serverAlert" class="alert-box" style="display:none;"></div>
+
+      <!-- Google OAuth (placeholder) -->
+      <button class="btn-google" type="button">
+        <svg width="17" height="17" viewBox="0 0 48 48">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        </svg>
+        Sign up with Google
+      </button>
+
+      <div class="divider">or register with email</div>
+
+      <!--
+        ACTION = register.php  (PHP processes this)
+        novalidate = we handle validation ourselves in JS
+        The PHP register.php will redirect after success
+      -->
+      <form method="POST" action="register.php" id="regForm" novalidate>
+
+        <!-- CSRF token is printed by register.php when it renders this form.
+             Since this is a static HTML file, the PHP register.php version
+             includes its own form — see register.php in your outputs folder.
+             If you're using this HTML file, remove action="register.php"
+             and handle via AJAX instead (see JS below). -->
+
+        <div class="form-row">
+          <div class="fg">
+            <label>First Name <span class="req">*</span></label>
+            <input type="text"  name="first_name" id="first_name"
+              placeholder="John" maxlength="50" autocomplete="given-name"/>
+            <div class="field-err" id="err_first_name" style="display:none"></div>
+          </div>
+          <div class="fg">
+            <label>Last Name <span class="req">*</span></label>
+            <input type="text"  name="last_name" id="last_name"
+              placeholder="Doe" maxlength="50" autocomplete="family-name"/>
+            <div class="field-err" id="err_last_name" style="display:none"></div>
+          </div>
+        </div>
+
+        <div class="fg">
+          <label>Username <span class="req">*</span></label>
+          <input type="text" name="username" id="username"
+            placeholder="e.g. johndoe99" maxlength="30" autocomplete="username"/>
+          <div class="field-err" id="err_username" style="display:none"></div>
+        </div>
+
+        <div class="fg">
+          <label>Email Address <span class="req">*</span></label>
+          <input type="email" name="email" id="email"
+            placeholder="you@example.com" maxlength="100" autocomplete="email"/>
+          <div class="field-err" id="err_email" style="display:none"></div>
+        </div>
+
+        <div class="fg">
+          <label>Password <span class="req">*</span></label>
+          <div class="pwd-wrap">
+            <input type="password" name="password" id="password"
+              placeholder="Min 8 chars, uppercase, number, symbol"
+              maxlength="128" autocomplete="new-password"/>
+            <button type="button" class="pwd-toggle" onclick="togglePwd('password',this)">👁</button>
+          </div>
+          <!-- Strength meter -->
+          <div class="strength-bar">
+            <div class="sb" id="sb1"></div>
+            <div class="sb" id="sb2"></div>
+            <div class="sb" id="sb3"></div>
+            <div class="sb" id="sb4"></div>
+          </div>
+          <div class="strength-hint" id="strengthHint">Enter a password</div>
+          <div class="field-err" id="err_password" style="display:none"></div>
+        </div>
+
+        <div class="fg">
+          <label>Confirm Password <span class="req">*</span></label>
+          <div class="pwd-wrap">
+            <input type="password" name="confirm_password" id="confirm_password"
+              placeholder="Repeat your password"
+              maxlength="128" autocomplete="new-password"/>
+            <button type="button" class="pwd-toggle" onclick="togglePwd('confirm_password',this)">👁</button>
+          </div>
+          <div id="matchMsg"></div>
+          <div class="field-err" id="err_confirm_password" style="display:none"></div>
+        </div>
+
+        <div class="check-row">
+          <input type="checkbox" name="terms" id="terms"/>
+          <label for="terms">
+            I agree to the <a href="#">Terms of Service</a> and
+            <a href="#">Privacy Policy</a>. We never sell your data.
+          </label>
+        </div>
+        <div class="field-err" id="err_terms" style="display:none"></div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <span id="btnText">🚀 Create Free Account</span>
+          <span id="btnSpinner" style="display:none">⏳ Creating account...</span>
+        </button>
+      </form>
+
+      <div class="switch-link">Already have an account? <a href="/fake-news-detector/login.php">Sign in →</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-bar">
+    <span>© 2026 TruthGuard AI. All rights reserved.</span>
+    <span>🔒 Your data is encrypted and never sold.</span>
+  </div>
+</footer>
+
+<!-- ══ JAVASCRIPT ══════════════════════════════════════════ -->
+<script>
+  // ── Helpers ───────────────────────────────────────────────
+  function setErr(id, msg) {
+    const el = document.getElementById('err_' + id);
+    const inp = document.getElementById(id);
+    if (!el) return;
+    el.textContent = '⚠ ' + msg;
+    el.style.display = 'flex';
+    if (inp) { inp.classList.add('is-error'); inp.classList.remove('is-ok'); }
+  }
+
+  function clearErr(id) {
+    const el = document.getElementById('err_' + id);
+    const inp = document.getElementById(id);
+    if (!el) return;
+    el.textContent = '';
+    el.style.display = 'none';
+    if (inp) inp.classList.remove('is-error');
+  }
+
+  function markOk(id) {
+    const inp = document.getElementById(id);
+    if (inp) { inp.classList.remove('is-error'); inp.classList.add('is-ok'); }
+  }
+
+  function val(id) {
+    return (document.getElementById(id)?.value ?? '').trim();
+  }
+
+  // ── Password strength meter ───────────────────────────────
+  document.getElementById('password').addEventListener('input', function() {
+    updateStrength(this.value);
+  });
+
+  function updateStrength(v) {
+    const bars  = ['sb1','sb2','sb3','sb4'].map(id => document.getElementById(id));
+    const hint  = document.getElementById('strengthHint');
+    let score = 0;
+    if (v.length >= 8)                       score++;
+    if (/[A-Z]/.test(v) && /[a-z]/.test(v)) score++;
+    if (/[0-9]/.test(v))                     score++;
+    if (/[\W_]/.test(v))                     score++;
+
+    const levels = [
+      { color: 'transparent', label: 'Enter a password' },
+      { color: '#ff4d6d',     label: 'Weak – add numbers & symbols' },
+      { color: '#ffc107',     label: 'Fair – add a special character' },
+      { color: '#00c6ff',     label: 'Good – almost there!' },
+      { color: '#00e5a0',     label: 'Strong ✓ Great password!' },
+    ];
+    bars.forEach((b, i) => b.style.background = i < score ? levels[score].color : 'var(--surface2)');
+    hint.textContent  = levels[score].label;
+    hint.style.color  = score === 0 ? 'var(--muted)' : levels[score].color;
+  }
+
+  // ── Confirm password live match ───────────────────────────
+  document.getElementById('confirm_password').addEventListener('input', checkMatch);
+
+  function checkMatch() {
+    const p1  = document.getElementById('password').value;
+    const p2  = document.getElementById('confirm_password').value;
+    const msg = document.getElementById('matchMsg');
+    clearErr('confirm_password');
+    if (!p2) { msg.innerHTML = ''; return; }
+    if (p1 === p2) {
+      msg.innerHTML = '<div class="field-ok">✓ Passwords match</div>';
+      document.getElementById('confirm_password').classList.remove('is-error');
+      document.getElementById('confirm_password').classList.add('is-ok');
+    } else {
+      msg.innerHTML = '<div class="field-err" style="display:flex">⚠ Passwords do not match</div>';
+      document.getElementById('confirm_password').classList.add('is-error');
+      document.getElementById('confirm_password').classList.remove('is-ok');
+    }
+  }
+
+  // ── Toggle password visibility ────────────────────────────
+  function togglePwd(id, btn) {
+    const inp = document.getElementById(id);
+    inp.type  = inp.type === 'password' ? 'text' : 'password';
+    btn.textContent = inp.type === 'password' ? '👁' : '🙈';
+  }
+
+  // ── Real-time blur validation ─────────────────────────────
+  document.getElementById('first_name').addEventListener('blur',    () => validateFirst());
+  document.getElementById('last_name').addEventListener('blur',     () => validateLast());
+  document.getElementById('username').addEventListener('blur',      () => validateUsername());
+  document.getElementById('email').addEventListener('blur',         () => validateEmail());
+  document.getElementById('password').addEventListener('blur',      () => validatePassword());
+  document.getElementById('confirm_password').addEventListener('blur', () => validateConfirm());
+
+  // ── Live username check (AJAX) ────────────────────────────
+  let usernameTimer;
+  document.getElementById('username').addEventListener('input', function() {
+    clearTimeout(usernameTimer);
+    const v = this.value.trim();
+    clearErr('username');
+    if (v.length < 3) return;
+    usernameTimer = setTimeout(() => {
+      fetch('check_username.php?username=' + encodeURIComponent(v))
+        .then(r => r.json())
+        .then(data => {
+          if (data.taken) {
+            setErr('username', 'This username is already taken.');
+          } else {
+            clearErr('username');
+            markOk('username');
+          }
+        })
+        .catch(() => {}); // silently fail if server not available
+    }, 500);
+  });
+
+  // ── Individual validators ─────────────────────────────────
+  function validateFirst() {
+    const v = val('first_name');
+    if (!v)           { setErr('first_name', 'First name is required.');              return false; }
+    if (v.length < 2) { setErr('first_name', 'Must be at least 2 characters.');       return false; }
+    if (v.length > 50){ setErr('first_name', 'Must be under 50 characters.');         return false; }
+    if (!/^[A-Za-z\s'\-]+$/.test(v)) { setErr('first_name', 'Letters only please.'); return false; }
+    clearErr('first_name'); markOk('first_name'); return true;
+  }
+
+  function validateLast() {
+    const v = val('last_name');
+    if (!v)           { setErr('last_name', 'Last name is required.');          return false; }
+    if (v.length < 2) { setErr('last_name', 'Must be at least 2 characters.'); return false; }
+    if (v.length > 50){ setErr('last_name', 'Must be under 50 characters.');   return false; }
+    if (!/^[A-Za-z\s'\-]+$/.test(v)) { setErr('last_name', 'Letters only.'); return false; }
+    clearErr('last_name'); markOk('last_name'); return true;
+  }
+
+  function validateUsername() {
+    const v = val('username');
+    if (!v)           { setErr('username', 'Username is required.');                          return false; }
+    if (v.length < 3) { setErr('username', 'At least 3 characters.');                        return false; }
+    if (v.length > 30){ setErr('username', 'Under 30 characters.');                           return false; }
+    if (!/^[a-zA-Z0-9_]+$/.test(v)) { setErr('username', 'Letters, numbers & _ only.');     return false; }
+    clearErr('username'); markOk('username'); return true;
+  }
+
+  function validateEmail() {
+    const v = val('email');
+    if (!v)  { setErr('email', 'Email is required.');              return false; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) {
+               setErr('email', 'Enter a valid email address.');    return false; }
+    clearErr('email'); markOk('email'); return true;
+  }
+
+  function validatePassword() {
+    const v = document.getElementById('password').value;
+    if (!v)           { setErr('password', 'Password is required.');                               return false; }
+    if (v.length < 8) { setErr('password', 'At least 8 characters.');                             return false; }
+    if (!/[A-Z]/.test(v)) { setErr('password', 'At least one uppercase letter (A-Z).');          return false; }
+    if (!/[a-z]/.test(v)) { setErr('password', 'At least one lowercase letter (a-z).');          return false; }
+    if (!/[0-9]/.test(v)) { setErr('password', 'At least one number (0-9).');                    return false; }
+    if (!/[\W_]/.test(v)) { setErr('password', 'At least one special character (!@#$%...).');   return false; }
+    clearErr('password'); markOk('password'); return true;
+  }
+
+  function validateConfirm() {
+    const p1 = document.getElementById('password').value;
+    const p2 = document.getElementById('confirm_password').value;
+    if (!p2)      { setErr('confirm_password', 'Please confirm your password.'); return false; }
+    if (p1 !== p2){ setErr('confirm_password', 'Passwords do not match.');       return false; }
+    clearErr('confirm_password'); markOk('confirm_password'); return true;
+  }
+
+  // ── Form submit ───────────────────────────────────────────
+  document.getElementById('regForm').addEventListener('submit', function(e) {
+    // Run all validators
+    const ok = [
+      validateFirst(),
+      validateLast(),
+      validateUsername(),
+      validateEmail(),
+      validatePassword(),
+      validateConfirm(),
+    ].every(Boolean); // true only if ALL pass
+
+    // Terms checkbox
+    const terms = document.getElementById('terms');
+    const termsErr = document.getElementById('err_terms');
+    if (!terms.checked) {
+      termsErr.textContent = '⚠ You must accept the Terms of Service.';
+      termsErr.style.display = 'flex';
+    } else {
+      termsErr.textContent = '';
+      termsErr.style.display = 'none';
+    }
+
+    if (!ok || !terms.checked) {
+      e.preventDefault(); // STOP form from submitting
+      // Scroll to first error
+      document.querySelector('.is-error')?.scrollIntoView({ behavior:'smooth', block:'center' });
+      return;
+    }
+
+    // All valid → show loading state, let form POST to register.php
+    document.getElementById('btnText').style.display    = 'none';
+    document.getElementById('btnSpinner').style.display = 'inline';
+    document.getElementById('submitBtn').disabled       = true;
+    // Form submits normally to register.php via POST
+  });
+</script>
+
+</body>
+</html>

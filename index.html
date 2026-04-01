@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TruthGuard AI – Fake News Detection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css">
+ 
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════ -->
+<header>
+  <nav>
+    <a href="index.php" class="nav-logo">
+      <div class="logo-icon">🛡️</div>
+      TruthGuard<span style="color:var(--accent)">AI</span>
+    </a>
+    <div class="nav-links">
+      <a href="#detect" class="hide-sm">Detector</a>
+      <a href="#features" class="hide-sm">Features</a>
+      <a href="#pricing" class="hide-sm">Pricing</a>
+      <a href="/fake-news-detector/login.php/">Login</a>
+      <a href="/fake-news-detector/register.php/">Get Started</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ══ HERO ════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-badge">AI-Powered • Real-Time • 97% Accuracy</div>
+  <h1>Stop Misinformation<br>Before It <span>Spreads</span></h1>
+  <p class="hero-sub">TruthGuard AI uses advanced machine learning to analyze news articles, social posts, and headlines — giving you a credibility score in seconds.</p>
+  <div class="hero-cta">
+    <a href="#detect" class="btn-primary">🔍 Analyze News Now</a>
+    <a href="#features" class="btn-ghost">How It Works</a>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num">12M+</div><div class="stat-label">Articles Analyzed</div></div>
+    <div class="stat-item"><div class="stat-num">97.4%</div><div class="stat-label">Accuracy Rate</div></div>
+    <div class="stat-item"><div class="stat-num">150+</div><div class="stat-label">Languages</div></div>
+    <div class="stat-item"><div class="stat-num">&lt;2s</div><div class="stat-label">Detection Speed</div></div>
+  </div>
+
+  <!-- App Preview Mockup -->
+  <div class="hero-visual">
+    <div class="browser-bar">
+      <div class="browser-dot bd-r"></div>
+      <div class="browser-dot bd-y"></div>
+      <div class="browser-dot bd-g"></div>
+      <div class="browser-url">truthguard.ai/detect</div>
+    </div>
+    <div class="app-preview">
+      <textarea class="preview-textarea" readonly>"Scientists discover a new study proving that drinking coffee reverses aging in humans, adding up to 30 years to lifespan according to researchers at Harvard Medical School who tested 10,000 patients over 2 years..."</textarea>
+      <div class="preview-result">
+        <div class="result-label">Credibility Score</div>
+        <div class="result-score">82%</div>
+        <div class="result-bar-wrap"><div class="result-bar"></div></div>
+        <span class="result-tag">✓ Likely Credible</span>
+        <div style="margin-top:1rem;font-size:0.78rem;color:var(--muted);line-height:1.6;">Source verified · Low sensationalism · Scientific claims need citation check</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ═════════════════════════════════════════ -->
+<div id="features" style="scroll-margin-top:80px">
+<div class="section">
+  <div class="section-label">How It Works</div>
+  <div class="section-title">Three steps to truth</div>
+  <p class="section-sub">Our multi-layer AI pipeline analyzes content across dozens of signals in under 2 seconds.</p>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <div class="step-title">Paste Your Content</div>
+      <div class="step-desc">Paste any news article, social media post, headline, or URL. TruthGuard accepts text in 150+ languages.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <div class="step-title">AI Deep Analysis</div>
+      <div class="step-desc">Our models cross-reference 40+ credibility signals: source reputation, claim verification, sentiment bias, and more.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <div class="step-title">Get Your Score</div>
+      <div class="step-desc">Receive a detailed credibility report with a confidence score, verdict tags, and an explanation of findings.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <div class="step-title">Share & Report</div>
+      <div class="step-desc">Share results with your team or report suspicious content directly to our community database.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ FEATURES ════════════════════════════════════════════ -->
+<div class="features-bg">
+<div class="section">
+  <div class="section-label">Features</div>
+  <div class="section-title">Built for trust, at scale</div>
+  <p class="section-sub">Every feature is designed to help individuals, journalists, and organizations fight misinformation.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🧠</div>
+      <div class="feature-title">Neural Language Model</div>
+      <div class="feature-desc">Fine-tuned transformer models trained on millions of verified and debunked news articles across every major topic.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔗</div>
+      <div class="feature-title">Source Verification</div>
+      <div class="feature-desc">Cross-references 10,000+ known credible and unreliable domains, updating in real-time with our intelligence feed.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">Bias Detection</div>
+      <div class="feature-desc">Identifies emotional manipulation, clickbait language, and political framing that distorts factual reporting.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌐</div>
+      <div class="feature-title">Multilingual Support</div>
+      <div class="feature-desc">Analyze news in English, Hindi, Spanish, Arabic, Nepali, and 150+ other languages with equal accuracy.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-title">Real-Time Analysis</div>
+      <div class="feature-desc">Results in under 2 seconds. Browser extension and API available for integrating fact-checking into your workflow.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <div class="feature-title">Privacy First</div>
+      <div class="feature-desc">We never store your analysis content. End-to-end encryption keeps your research completely private.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ DETECTION TOOL ═══════════════════════════════════════ -->
+<div id="detect">
+<div class="section">
+  <div class="section-label">Try It Now — Free</div>
+  <div class="section-title">Analyze any news content</div>
+  <p class="section-sub">Paste a news article, headline, or social media post below and get an instant credibility report.</p>
+
+  <div class="tool-wrap">
+    <textarea class="tool-textarea" id="newsInput" placeholder="Paste your news article, headline, or social media post here..." oninput="updateCount()"></textarea>
+    <div class="tool-actions">
+      <span class="char-count" id="charCount">0 / 5000 characters</span>
+      <button class="btn-analyze" id="analyzeBtn" onclick="analyzeNews()">
+        <span class="spinner" id="spinner"></span>
+        <span id="btnText">🔍 Analyze Content</span>
+      </button>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+      <div class="result-header">
+        <div>
+          <div style="font-size:0.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:0.4rem;">Verdict</div>
+          <div class="result-verdict" id="resultVerdict">Likely Credible</div>
+        </div>
+        <div class="confidence-wrap">
+          <div class="confidence-label">Confidence</div>
+          <div class="confidence-val" id="resultConfidence">84%</div>
+        </div>
+      </div>
+      <div class="meter"><div class="meter-fill" id="meterFill" style="width:0%"></div></div>
+      <div class="result-tags" id="resultTags"></div>
+      <div class="result-summary" id="resultSummary"></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ TESTIMONIALS ════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-label">Trusted By</div>
+  <div class="section-title">What our users say</div>
+  <div class="testimonials-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"TruthGuard saved our newsroom hours of fact-checking every day. The accuracy is remarkable — it even caught satire articles being shared as real news."</div>
+      <div class="testi-author">
+        <div class="testi-avatar">SK</div>
+        <div><div class="testi-name">Sarah Kim</div><div class="testi-role">Senior Editor, Reuters</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"As a journalism professor, I recommend TruthGuard to all my students. It's an essential tool for media literacy in the age of AI-generated content."</div>
+      <div class="testi-author">
+        <div class="testi-avatar">MP</div>
+        <div><div class="testi-name">Dr. Marcus Patel</div><div class="testi-role">Prof. of Journalism, Columbia</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★☆</div>
+      <div class="testi-text">"The browser extension is incredible. I never share an article without running it through TruthGuard first. It's completely changed how I consume news."</div>
+      <div class="testi-author">
+        <div class="testi-avatar">AR</div>
+        <div><div class="testi-name">Anika Rao</div><div class="testi-role">Digital Rights Advocate</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PRICING ═════════════════════════════════════════════ -->
+<div id="pricing" style="scroll-margin-top:80px">
+<div class="features-bg">
+<div class="section">
+  <div class="section-label">Pricing</div>
+  <div class="section-title">Start free, scale with truth</div>
+  <p class="section-sub">No credit card required to get started. Upgrade anytime.</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name">Free</div>
+      <div class="price-val">$0</div>
+      <div class="price-period">forever</div>
+      <ul class="price-features">
+        <li>10 analyses per day</li>
+        <li>Basic credibility score</li>
+        <li>3 languages supported</li>
+        <li>Community database access</li>
+      </ul>
+      <button class="btn-plan btn-plan-outline" onclick="window.location='register.html'">Get Started Free</button>
+    </div>
+    <div class="price-card featured">
+      <div class="price-badge">Most Popular</div>
+      <div class="price-name">Pro</div>
+      <div class="price-val">$12</div>
+      <div class="price-period">per month, billed annually</div>
+      <ul class="price-features">
+        <li>Unlimited analyses</li>
+        <li>Deep credibility report</li>
+        <li>All 150+ languages</li>
+        <li>Browser extension</li>
+        <li>Bias & sentiment analysis</li>
+        <li>Export reports as PDF</li>
+      </ul>
+      <button class="btn-plan btn-plan-fill" onclick="window.location='register.html'">Start Pro Trial</button>
+    </div>
+    <div class="price-card">
+      <div class="price-name">Enterprise</div>
+      <div class="price-val">Custom</div>
+      <div class="price-period">contact for pricing</div>
+      <ul class="price-features">
+        <li>Everything in Pro</li>
+        <li>REST API access</li>
+        <li>Team dashboard</li>
+        <li>SSO & audit logs</li>
+        <li>Dedicated support</li>
+        <li>Custom model fine-tuning</li>
+      </ul>
+      <button class="btn-plan btn-plan-outline">Contact Sales</button>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ══ CTA BANNER ══════════════════════════════════════════ -->
+<div class="section">
+  <div class="cta-banner">
+    <h2>Ready to fight misinformation?</h2>
+    <p>Join over 2 million users who trust TruthGuard AI to verify the news they read and share every day.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem">
+      <a href="register.html" class="btn-primary">Create Free Account</a>
+      <a href="#detect" class="btn-ghost">Try Without Signing Up</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <div class="logo-icon" style="width:28px;height:28px;font-size:0.9rem;">🛡️</div>
+        TruthGuard<span style="color:var(--accent)">AI</span>
+      </div>
+      <p>AI-powered fake news detection built to protect the integrity of information online. Trusted by journalists, educators, and everyday readers.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#detect">Detector</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#">Browser Extension</a></li>
+        <li><a href="#">API Docs</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+        <li><a href="#">GDPR</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 TruthGuard AI. All rights reserved.</span>
+    <span style="color:var(--muted)">Made with ❤️ to fight misinformation</span>
+  </div>
+</footer>
+
+<script>
+  function updateCount(){
+    const v=document.getElementById('newsInput').value;
+    document.getElementById('charCount').textContent=v.length+' / 5000 characters';
+  }
+
+  function analyzeNews(){
+    const text=document.getElementById('newsInput').value.trim();
+    if(!text){ alert('Please paste some news content first.'); return; }
+
+    const btn=document.getElementById('analyzeBtn');
+    const spinner=document.getElementById('spinner');
+    const btnText=document.getElementById('btnText');
+    btn.disabled=true; spinner.style.display='block'; btnText.textContent='Analyzing...';
+
+    setTimeout(()=>{
+      spinner.style.display='none'; btnText.textContent='🔍 Analyze Content'; btn.disabled=false;
+      showResult(text);
+    },2000);
+  }
+
+  function showResult(data){
+    let resultDiv = document.getElementById("result");
+
+    let verdict = data.result == 1 ? "Real News ✅" : "Fake News ❌";
+    let color = data.result == 1 ? "green" : "red";
+    let confidence = (data.confidence * 100).toFixed(2);
+
+    resultDiv.innerHTML = `
+        <h2 style="color:${color};">${verdict}</h2>
+        <p>Confidence: ${confidence}%</p>
+    `;
+}
+</script>
+</body>
+</html>
