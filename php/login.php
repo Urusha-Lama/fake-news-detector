@@ -204,10 +204,10 @@ $csrf = csrfToken();
       TruthGuard<span style="color:var(--accent)">AI</span>
     </a>
     <div class="nav-links">
-      <a href="http://localhost/fake-news-detector/index.html">Home</a>
-      <a href="http://localhost/fake-news-detector/index.html#features">Features</a>
-      <a href="http://localhost/fake-news-detector/index.html#pricing">Pricing</a>
-      <a href="http://localhost/fake-news-detector/register.php" class="btn-accent">Sign Up Free</a>
+      <a href="http://localhost/fake-news-detector/php/index.html">Home</a>
+      <a href="http://localhost/fake-news-detector/php/index.html#features">Features</a>
+      <a href="http://localhost/fake-news-detector/php/index.html#pricing">Pricing</a>
+      <a href="http://localhost/fake-news-detector/php/register.php" class="btn-accent">Sign Up Free</a>
     </div>
   </nav>
 </header>

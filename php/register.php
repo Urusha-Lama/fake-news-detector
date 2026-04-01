@@ -244,7 +244,7 @@ $csrf = csrfToken();
   <div class="auth-form-side">
     <div class="auth-card">
       <h3>Create your account</h3>
-      <p class="sub">Already have an account? <a href="login.php">Sign in →</a></p>
+      <p class="sub">Already have an account? <a href="http://localhost/fake-news-detector/php/login.php">Sign in →</a></p>
 
       <?php if (!empty($errors['general'])): ?>
         <div class="alert"><?= $errors['general'] ?></div>
